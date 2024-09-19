@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Report Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <h1>API Report Dashboard</h1>
+
+    <form id="url-form">
+        <label for="website-url">Enter Website URL:</label>
+        <input type="text" id="website-url" placeholder="http://example.com" required>
+        <button type="submit">Generate Report</button>
+    </form>
+
+    <div id="status-message"></div>
+
+    <div id="report-container"></div>
+
+    <script>
+        const form = document.getElementById('url-form');
+        const reportContainer = document.getElementById('report-container');
+        const statusMessage = document.getElementById('status-message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = document.getElementById('website-url').value;
+            statusMessage.textContent = 'Generating report, please wait...';
+
+            // Clear previous report
+            reportContainer.innerHTML = '';
+
+            // Send URL to server to start report generation
+            const response = await fetch('/api/generate-report', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
+            });
+            const { requestId } = await response.json();
+
+            // Poll for report status every 3 minutes
+            const checkReportStatus = async () => {
+                const response = await fetch(`/api/report-status/${requestId}`);
+                const data = await response.json();
+                if (data.status === 'ready') {
+                    clearInterval(pollingInterval);
+                    const reportResponse = await fetch(`/api/report/${requestId}`);
+                    const reportData = await reportResponse.json();
+                    displayReport(reportData);
+                    statusMessage.textContent = 'Report ready!';
+                }
+            };
+
+            const pollingInterval = setInterval(checkReportStatus, 3000); // 3 minutes
+            checkReportStatus(); // Initial check
+        });
+
+        // Function to display report
+        const displayReport = (data) => {
+            data.forEach((report, index) => {
+                // Create parent element for each report page
+                const parentDiv = document.createElement('div');
+                parentDiv.classList.add('parent-item');
+
+                // Create serial number
+                const serialNumber = document.createElement('span');
+                serialNumber.classList.add('serial-number');
+                serialNumber.textContent = `${index + 1}.`;
+
+                // Create page element with dropdown icon
+                const pageElement = document.createElement('span');
+                pageElement.textContent = report.page;
+                pageElement.classList.add('parent-title');
+
+                const toggleIcon = document.createElement('span');
+                toggleIcon.innerHTML = '▼'; // Dropdown arrow
+                toggleIcon.classList.add('dropdown-icon');
+
+                parentDiv.appendChild(serialNumber);
+                parentDiv.appendChild(pageElement);
+                parentDiv.appendChild(toggleIcon);
+
+                // Create child list for API calls (hidden initially)
+                const childList = document.createElement('ul');
+                childList.classList.add('child-list');
+                childList.style.display = 'none';
+
+                report.apiList.forEach((api, apiIndex) => {
+                    const childItem = document.createElement('li');
+                    childItem.classList.add('child-item');
+
+                    // Create serial number for child
+                    const childSerial = document.createElement('span');
+                    childSerial.textContent = `${apiIndex + 1}.`;
+                    childSerial.classList.add('serial-number-child');
+
+                    const childText = document.createElement('span');
+                    childText.textContent = api;
+
+                    // If it's a URL, make it clickable
+                    if (api.startsWith('http')) {
+                        const anchor = document.createElement('a');
+                        anchor.href = api;
+                        anchor.target = '_blank';
+                        anchor.textContent = api;
+                        childText.textContent = ''; // Remove text as it's now wrapped in anchor
+                        childText.appendChild(anchor);
+                    }
+
+                    childItem.appendChild(childSerial);
+                    childItem.appendChild(childText);
+
+                    // Add divider after each child item
+                    const divider = document.createElement('div');
+                    divider.classList.add('divider');
+                    childItem.appendChild(divider);
+
+                    childList.appendChild(childItem);
+                });
+
+                parentDiv.appendChild(childList);
+
+                // Toggle child list on click
+                parentDiv.addEventListener('click', () => {
+                    childList.style.display = childList.style.display === 'none' ? 'block' : 'none';
+                });
+
+                reportContainer.appendChild(parentDiv);
+            });
+        };
+    </script>
+</body>
+
+</html>

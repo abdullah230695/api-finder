@@ -1,0 +1,21 @@
+[
+  {
+    "page": "http://web-evodev-next.influx.co.in/",
+    "apiList": [
+      "https://analytics.google.com/g/collect?v=2&tid=G-8XVG52YZ4B&gtm=45je49h0v889660808z89168212454za200zb9168212454&_p=1726740895761&_gaz=1&gcd=13l3l3l3l1l1&npa=0&dma=0&tag_exp=0&cid=476683141.1726740896&ul=en-us&sr=800x600&uaa=x86&uab=64&uafvl=Chromium%3B129.0.6668.58%7CNot%253DA%253FBrand%3B8.0.0.0&uamb=0&uam=&uap=Linux&uapv=6.8.0&uaw=0&are=1&pae=1&frm=0&pscdl=&_s=1&sid=1726740896&sct=1&seg=0&dl=https%3A%2F%2Fweb-evodev-next.influx.co.in%2F&dt=EVO%20Entertainment%20%7C%20Cinema.%20Bowling.%20Games.&en=page_view&_fv=1&_nsi=1&_ss=1&tfd=1731",
+      "https://api-evodev.influx.co.in//user/v2/token",
+      "https://api-evodev.influx.co.in//user/v2/token",
+      "https://api-evodev.influx.co.in//user/v2/token",
+      "https://api-evodev.influx.co.in//user/v2/token",
+      "https://api-evodev.influx.co.in/cms/v2/packs/homebanner",
+      "https://api-evodev.influx.co.in//cms/v2/packs/fold3images",
+      "https://api-evodev.influx.co.in/cms/v2/films",
+      "https://api-evodev.influx.co.in//cms/v2/packs/fold4images",
+      "https://web-evodev-next.influx.co.in/www.google.com?_rsc=1wtp7",
+      "https://web-evodev-next.influx.co.in/movieinfo/deadpool--wolverine-GRP?_rsc=1wtp7",
+      "https://api-evodev.influx.co.in/cms/v2/cinemas",
+      "https://api-evodev.influx.co.in/cms/v2/packs/nowshowing",
+      "https://api-evodev.influx.co.in/cms/v2/experiences"
+    ]
+  }
+]

@@ -1,0 +1,122 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#status-message {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #d9534f;
+}
+
+#report-container {
+    margin-top: 20px;
+}
+
+/* Parent styles */
+.parent-item {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+.parent-item:hover {
+    background-color: #0056b3;
+}
+
+.serial-number {
+    background-color: white;
+    color: #007bff;
+    padding: 5px;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.parent-title {
+    font-weight: bold;
+}
+
+.dropdown-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Child styles */
+.child-list {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.child-item {
+    background-color: #333;
+    color: white;
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.serial-number-child {
+    background-color: white;
+    color: #333;
+    padding: 5px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.child-item a {
+    color: #61dafb;
+    text-decoration: none;
+}
+
+.child-item a:hover {
+    text-decoration: underline;
+}
+
+/* Divider between child items */
+.divider {
+    margin-top: 5px;
+    height: 1px;
+    background-color: #ddd;
+}
